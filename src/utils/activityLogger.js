@@ -1,4 +1,9 @@
 // src/utils/activityLogger.js
+let activityCounter = 0;
+const activityThreshold = 2; // Customize the threshold as needed
+const timeWindow = 150; 
+let lastActivityTime = Date.now();
+let isBlocked = false; 
 
 function getDeviceInfo() {
     return {
@@ -22,6 +27,30 @@ async function getUserIP() {
   }
 
 export async function logActivity(eventType, eventData = {}) {
+
+      if (isBlocked) {
+        console.log("Action blocked due to suspicious activity.");
+        return; // Stop further actions if blocked
+    }
+
+    const currentTime = Date.now();
+    console.log(currentTime - lastActivityTime , timeWindow)
+    // Reset the counter if time window has passed
+    if (currentTime - lastActivityTime > timeWindow) {
+      activityCounter = 0;
+      lastActivityTime = currentTime;
+    }
+
+    // Increment activity counter for each log
+    activityCounter++;
+
+    // Check for suspicious activity
+    if (activityCounter > activityThreshold) {
+      isBlocked = true; 
+      console.log("Suspicious activity detected. You may be restricted.");
+      return; // Stop logging further to the backend for now
+    }
+  
     const ipAddress = await getUserIP();
     const deviceInfo = getDeviceInfo();
     const activity = {

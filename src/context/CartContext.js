@@ -14,11 +14,11 @@ export function CartProvider({ children }) {
       // Update quantity if needed (here we keep it simple)
       setCartItems(
         cartItems.map((item) =>
-          item.id === product.id ? { ...item } : item
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         )
       );
     } else {
-      setCartItems([...cartItems, { ...product }]);
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
     }
   };
 

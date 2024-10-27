@@ -16,7 +16,7 @@ function Cart() {
   const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
 
   const totalPrice = cartItems.reduce(
-    (total, item) => total + parseFloat(item.price.slice(1)),
+    (total, item) => total + parseFloat(item.price.slice(1)) * parseFloat(item.quantity),
     0
   );
 
@@ -34,7 +34,7 @@ function Cart() {
               <ListItem key={item.id}>
                 <ListItemText
                   primary={item.name}
-                  secondary={`Price: ${item.price}`}
+                  secondary={`Price: ${item.price} | Quantity: ${item.quantity}`}
                 />
                 <Button
                   variant="text"
