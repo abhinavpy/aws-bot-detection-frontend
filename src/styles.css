@@ -1,0 +1,95 @@
+/* src/styles.css */
+
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+  }
+  
+  /* Login Page */
+  .login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+  }
+  
+  .login-container h2 {
+    text-align: center;
+    color: #ff9900; /* Amazon Orange */
+  }
+  
+  .login-container label {
+    display: block;
+    margin-bottom: 10px;
+    color: #111; /* Amazon Dark Text */
+  }
+  
+  .login-container input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff9900; /* Amazon Orange */
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .login-button:hover {
+    background-color: #e68a00;
+  }
+  
+  /* Dashboard Page */
+  .dashboard-container {
+    padding: 20px;
+  }
+  
+  .dashboard-container h2 {
+    color: #131921; /* Amazon Dark Blue */
+  }
+  
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .product-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 15px;
+    flex: 1 0 30%;
+    box-sizing: border-box;
+  }
+  
+  .product-card h3 {
+    color: #007600; /* Amazon Green */
+  }
+  
+  .product-card p {
+    color: #555;
+  }
+  
+  .view-button {
+    padding: 10px;
+    background-color: #ff9900; /* Amazon Orange */
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .view-button:hover {
+    background-color: #e68a00;
+  }
+  
