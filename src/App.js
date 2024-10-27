@@ -4,7 +4,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
-import ProductDetails from './components/ProductDetails'; // Import the new component
+import ProductDetails from './components/ProductDetails';
+import Cart from './components/Cart'; // Import Cart component
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -34,7 +35,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/product/:id" element={<ProductDetails />} /> {/* Dynamic route */}
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} /> {/* New cart route */}
         </Routes>
       </Router>
     </ThemeProvider>

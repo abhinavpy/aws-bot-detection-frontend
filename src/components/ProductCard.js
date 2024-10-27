@@ -1,6 +1,6 @@
 // src/components/ProductCard.js
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Card,
   CardMedia,
@@ -10,9 +10,12 @@ import {
   Button,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
+import { CartContext } from '../context/CartContext';
+import { logActivity } from '../utils/activityLogger';
 
 function ProductCard({ product }) {
   const [imageError, setImageError] = useState(false);
+  const { addToCart } = useContext(CartContext);
 
   const defaultImage =
     'https://via.placeholder.com/200x200.png?text=No+Image+Available';
@@ -49,10 +52,21 @@ function ProductCard({ product }) {
           color="primary"
           component={RouterLink}
           to={`/product/${product.id}`}
+          onClick={() =>
+            logActivity('VIEW_PRODUCT', { productId: product.id })
+          }
         >
           View Product
         </Button>
-        <Button size="small" variant="outlined" color="secondary">
+        <Button
+          size="small"
+          variant="outlined"
+          color="secondary"
+          onClick={() => {
+            addToCart(product);
+            logActivity('ADD_TO_CART', { productId: product.id });
+          }}
+        >
           Add to Cart
         </Button>
       </CardActions>

@@ -1,9 +1,9 @@
 // src/components/Dashboard.js
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
 import { products } from '../data/products';
 import ProductCard from './ProductCard';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -17,13 +17,20 @@ import {
   Select,
   MenuItem,
   Button,
+  IconButton,
+  Badge,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../context/CartContext';
+import { logActivity } from '../utils/activityLogger';
 
 function Dashboard() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState('');
+  const { cartItems } = useContext(CartContext);
 
   // Handle logout action
   const handleLogout = () => {
@@ -54,6 +61,11 @@ function Dashboard() {
     return 0;
   });
 
+  // Log page view
+  useEffect(() => {
+    logActivity('PAGE_VIEW', { page: 'Dashboard' });
+  }, []);
+
   return (
     <>
       {/* Navigation Bar */}
@@ -62,6 +74,16 @@ function Dashboard() {
           <Typography variant="h6" color="inherit" sx={{ flexGrow: 1 }}>
             E-commerce Platform
           </Typography>
+          <IconButton
+            color="inherit"
+            component={RouterLink}
+            to="/cart"
+            sx={{ mr: 2 }}
+          >
+            <Badge badgeContent={cartItems.length} color="error">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
           <Button color="inherit" onClick={handleLogout}>
             Logout
           </Button>
